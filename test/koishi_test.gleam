@@ -30,3 +30,15 @@ pub fn to_svg_renders_html_to_svg_test() -> Promise(Nil) {
     Nil
   })
 }
+
+pub fn to_svg_missing_font_returns_error_test() -> Promise(Nil) {
+  let options =
+    koishi.Options(width: 1200, height: 630, fonts: [], debug: False)
+
+  koishi.to_svg("<div style=\"display:flex;\">hi</div>", options)
+  |> promise.map(fn(result) {
+    let assert Error(koishi.SatoriError(message)) = result
+    assert message != ""
+    Nil
+  })
+}
