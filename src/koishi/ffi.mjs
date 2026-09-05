@@ -12,11 +12,16 @@ import { SatoriError, Italic } from "../koishi.mjs";
 import { readFileSync } from "node:fs";
 
 // Gleam BitArray -> Uint8Array.
-// Verified: BitArray.rawBuffer is a Uint8Array for byte-aligned data.
+// Fast path: byte-aligned BitArrays (bitOffset 0, whole bytes) — the prelude
+// guarantees rawBuffer is exactly the data in that case.
 export function fontDataToUint8Array(bitArray) {
-  const bytes = bitArray.rawBuffer;
-  if (bytes instanceof Uint8Array) return bytes;
-  return Uint8Array.from(bytes);
+  if (bitArray.bitOffset === 0 && bitArray.bitSize % 8 === 0) {
+    return bitArray.rawBuffer;
+  }
+  // Unaligned BitArrays: copy the logical bytes out via byteAt.
+  const bytes = new Uint8Array(bitArray.byteSize);
+  for (let i = 0; i < bytes.length; i++) bytes[i] = bitArray.byteAt(i);
+  return bytes;
 }
 
 // Gleam Font record -> satori font object.
