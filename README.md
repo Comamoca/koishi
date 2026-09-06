@@ -93,6 +93,13 @@ npm ci     # install npm deps (komeiji, satori, test font fixture)
 gleam test # runs on the JavaScript target
 ```
 
+A runnable sample that renders an OG image from a Lustre tree and writes
+`og-image.svg` lives in `src/example.gleam`:
+
+```sh
+gleam run -m example
+```
+
 ## 👍 Special Thanks
 
 - [komeiji](https://github.com/Comamoca/komeiji)

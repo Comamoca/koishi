@@ -5,3 +5,4 @@ erl_crash.dump
 /node_modules
 .direnv/
 .omo/
+/og-image.svg
