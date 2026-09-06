@@ -11,6 +11,7 @@ lustre = ">= 5.7.1 and < 6.0.0"
 # Local development: use the koishi package in this repository.
 # Once koishi is published with this API, switch to `koishi = ">= 1.0.0 ..."`
 koishi = { path = ".." }
+simplifile = ">= 2.7.0 and < 3.0.0"
 
 [javascript]
 runtime = "node"
