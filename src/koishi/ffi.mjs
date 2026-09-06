@@ -9,7 +9,7 @@ import { html } from "@comamoca/komeiji";
 import satori from "satori";
 import { Ok as GleamOk, Error as GleamError, toBitArray } from "../gleam.mjs";
 import { SatoriError, Italic } from "../koishi.mjs";
-import { writeFileSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 
 // Gleam BitArray -> Uint8Array.
 // Fast path: byte-aligned BitArrays (bitOffset 0, whole bytes) — the prelude
@@ -45,16 +45,10 @@ export function optionsToJs(options) {
   };
 }
 
-// Load a font file from disk as a Gleam BitArray.
-// Gleam type: String -> BitArray. Used by tests and the example module.
+// Test-only helper: load a font file as a Gleam BitArray.
+// Gleam type: String -> BitArray. Used via @external from test modules.
 export function read_test_font_file(path) {
   return toBitArray(Array.from(readFileSync(path)));
-}
-
-// Write a text file from disk (used by the example module to output the SVG).
-// Gleam type: String -> String -> Nil. Throws on I/O failure.
-export function write_file(path, contents) {
-  writeFileSync(path, contents);
 }
 
 // html: String -> Options record -> Promise.

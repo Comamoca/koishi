@@ -94,10 +94,12 @@ gleam test # runs on the JavaScript target
 ```
 
 A runnable sample that renders an OG image from a Lustre tree and writes
-`og-image.svg` lives in `src/example.gleam`:
+`og-image.svg` lives in the standalone `example/` package (which depends on
+koishi via a path dependency):
 
 ```sh
-gleam run -m example
+cd example
+gleam run
 ```
 
 ## 👍 Special Thanks

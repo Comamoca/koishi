@@ -1,7 +1,7 @@
-//// Example: render an OG image from a Lustre element tree.
+//// Sample: render an OG image from a Lustre element tree with koishi.
 ////
-//// Run with `gleam run -m example`. The generated SVG is written to
-//// `og-image.svg` in the project root.
+//// Run with `gleam run` from the `example/` directory. The generated SVG is
+//// written to `og-image.svg` in the current working directory.
 
 import gleam/io
 import gleam/javascript/promise
@@ -10,19 +10,21 @@ import koishi/lustre
 import lustre/attribute
 import lustre/element/html
 
-@external(javascript, "./koishi/ffi.mjs", "read_test_font_file")
+@external(javascript, "./koishi_example_ffi.mjs", "read_font_file")
 fn read_font_file(path: String) -> BitArray
 
-@external(javascript, "./koishi/ffi.mjs", "write_file")
+@external(javascript, "./koishi_example_ffi.mjs", "write_file")
 fn write_file(path: String, contents: String) -> Nil
 
 pub fn main() -> promise.Promise(Nil) {
   let font_bytes =
     read_font_file(
-      "node_modules/@fontsource/inter/files/inter-latin-400-normal.woff",
+      "../node_modules/@fontsource/inter/files/inter-latin-400-normal.woff",
     )
-  let font_normal = koishi.Font("Inter", font_bytes, 400, koishi.NormalStyle)
-  let font_bold = koishi.Font("Inter", font_bytes, 700, koishi.NormalStyle)
+  let font_normal =
+    koishi.Font("Inter", font_bytes, 400, koishi.NormalStyle)
+  let font_bold =
+    koishi.Font("Inter", font_bytes, 700, koishi.NormalStyle)
   let options =
     koishi.Options(
       width: 1200,
@@ -41,12 +43,14 @@ pub fn main() -> promise.Promise(Nil) {
         attribute.style("background-color", "#1a1b26"),
       ],
       [
-        html.h1([attribute.style("color", "#ffffff")], [
-          html.text("Hello from koishi!"),
-        ]),
-        html.p([attribute.style("color", "#c0caf5")], [
-          html.text("OGP image generated from a Lustre element tree"),
-        ]),
+        html.h1(
+          [attribute.style("color", "#ffffff")],
+          [html.text("Hello from koishi!")],
+        ),
+        html.p(
+          [attribute.style("color", "#c0caf5")],
+          [html.text("OGP image generated from a Lustre element tree")],
+        ),
       ],
     )
 
@@ -57,7 +61,8 @@ pub fn main() -> promise.Promise(Nil) {
         write_file("og-image.svg", svg)
         io.println("Wrote og-image.svg")
       }
-      Error(koishi.SatoriError(message)) -> io.println("Error: " <> message)
+      Error(koishi.SatoriError(message)) ->
+        io.println("Error: " <> message)
     }
     Nil
   })

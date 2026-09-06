@@ -1,0 +1,16 @@
+name = "koishi_example"
+version = "1.0.0"
+target = "javascript"
+
+description = "Sample: render an OG image from a Lustre element tree with koishi"
+
+[dependencies]
+gleam_stdlib = ">= 0.44.0 and < 2.0.0"
+gleam_javascript = ">= 1.0.1 and < 2.0.0"
+lustre = ">= 5.7.1 and < 6.0.0"
+# Local development: use the koishi package in this repository.
+# Once koishi is published with this API, switch to `koishi = ">= 1.0.0 ..."`
+koishi = { path = ".." }
+
+[javascript]
+runtime = "node"
