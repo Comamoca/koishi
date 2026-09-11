@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.4](https://github.com/Comamoca/koishi/compare/v1.0.3...v1.0.4) - 2026-09-11
+
+- feat: add SVG to PNG conversion via resvg by @Comamoca in https://github.com/Comamoca/koishi/pull/12
+
 ## [v1.0.3](https://github.com/Comamoca/koishi/compare/v1.0.2...v1.0.3) - 2026-09-11
 
 - chore: add Renovate config based on hinoto by @Comamoca in https://github.com/Comamoca/koishi/pull/10
