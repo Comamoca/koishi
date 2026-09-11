@@ -17,7 +17,7 @@ jobs:
     outputs:
       tag: ${{ steps.tagpr.outputs.tag }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -31,7 +31,7 @@ jobs:
     if: needs.tagpr.outputs.tag != ''
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: erlef/setup-beam@v1
         with:
@@ -44,7 +44,7 @@ jobs:
       - name: Publish package to Hex
         run: gleam publish --yes
         env:
-          HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
+          HEXPM_API_KEY: ${{ secrets.HEX_API_KEY }}
 
       - name: Publish docs to HexDocs
         run: gleam docs publish
