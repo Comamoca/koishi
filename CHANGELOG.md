@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.2](https://github.com/Comamoca/koishi/compare/v1.0.1...v1.0.2) - 2026-09-11
+
+- ci: upgrade checkout and setup-node to v5 by @Comamoca in https://github.com/Comamoca/koishi/pull/8
+
 ## [v1.0.1](https://github.com/Comamoca/koishi/compare/v1.0.0...v1.0.1) - 2026-09-11
 
 ## [v1.0.0](https://github.com/Comamoca/koishi/commits/v1.0.0) - 2026-09-11
