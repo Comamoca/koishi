@@ -1,5 +1,7 @@
 # Changelog
 
+## [v1.0.1](https://github.com/Comamoca/koishi/compare/v1.0.0...v1.0.1) - 2026-09-11
+
 ## [v1.0.0](https://github.com/Comamoca/koishi/commits/v1.0.0) - 2026-09-11
 
 - Feat/ogp by @Comamoca in https://github.com/Comamoca/koishi/pull/1
