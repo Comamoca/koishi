@@ -15,14 +15,14 @@ jobs:
       matrix:
         runtime: [node, bun, deno]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: erlef/setup-beam@v1
         with:
           otp-version: latest
           gleam-version: latest
           rebar3-version: "3"
           # elixir-version: "1"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: "24"
       - uses: oven-sh/setup-bun@v2
