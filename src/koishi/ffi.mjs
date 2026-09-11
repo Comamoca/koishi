@@ -7,8 +7,13 @@
  */
 import { html } from "@comamoca/komeiji";
 import satori from "satori";
-import { Ok as GleamOk, Error as GleamError, toBitArray } from "../gleam.mjs";
-import { SatoriError, Italic } from "../koishi.mjs";
+import { Resvg } from "@resvg/resvg-js";
+import {
+  Ok as GleamOk,
+  Error as GleamError,
+  toBitArray,
+} from "../gleam.mjs";
+import { SatoriError, PngError, Italic } from "../koishi.mjs";
 import { readFileSync } from "node:fs";
 
 // Gleam BitArray -> Uint8Array.
@@ -75,4 +80,33 @@ export function renderInternal(htmlString, options) {
 function errorToMessage(err) {
   if (err instanceof globalThis.Error && err.message) return err.message;
   return String(err);
+}
+
+// Uint8Array -> Gleam BitArray. Relies on the Gleam JS prelude's
+// toBitArray helper, which is also used by read_test_font_file.
+function uint8ArrayToBitArray(bytes) {
+  return toBitArray(Array.from(bytes));
+}
+
+// SVG string -> PngOptions record -> Promise<Result(BitArray, PngError)>.
+// Uses @resvg/resvg-js to rasterise the SVG to PNG.
+export function svgToPng(svg, options) {
+  return new Promise((resolve) => {
+    try {
+      const opts = { font: { loadSystemFonts: false } };
+      if (options.width > 0) {
+        opts.fitTo = { mode: "width", value: options.width };
+      } else if (options.height > 0) {
+        opts.fitTo = { mode: "height", value: options.height };
+      }
+      if (options.background) {
+        opts.background = options.background;
+      }
+      const resvg = new Resvg(svg, opts);
+      const pngData = resvg.render();
+      resolve(new GleamOk(uint8ArrayToBitArray(pngData.asPng())));
+    } catch (err) {
+      resolve(new GleamError(new PngError(errorToMessage(err))));
+    }
+  });
 }

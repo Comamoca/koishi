@@ -20,4 +20,6 @@ runtime = "node"
 
 [javascript.deno]
 allow_env = ["NODE_ENV",  "JEST_WORKER_ID"]
-allow_read = ["./node_modules/harfbuzzjs/hb.wasm", "gleam.toml", "test",  "node_modules/@fontsource/inter/files/inter-latin-400-normal.woff"]
+allow_read = ["./node_modules/harfbuzzjs/hb.wasm", "gleam.toml", "test",  "node_modules/@fontsource/inter/files/inter-latin-400-normal.woff", "node_modules/@resvg/resvg-js/"]
+allow_ffi = true
+allow_sys = true
