@@ -1,3 +1,4 @@
+import gleam/bit_array
 import gleam/int
 import gleam/javascript/promise.{type Promise}
 import gleam/string
@@ -69,6 +70,21 @@ pub fn lustre_element_to_svg_test() -> Promise(Nil) {
     // satori renders text as glyph <path> outlines (never literal text), so
     // the presence of path data is the signal that content actually rendered.
     assert string.contains(svg, "<path")
+    Nil
+  })
+}
+
+pub fn to_png_renders_svg_to_png_test() -> Promise(Nil) {
+  let svg =
+    "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\">"
+    <> "<rect width=\"100\" height=\"100\" fill=\"red\"/></svg>"
+
+  koishi.to_png(svg, koishi.PngOptions(width: 100, height: 0, background: ""))
+  |> promise.map(fn(result) {
+    let assert Ok(png) = result
+    assert bit_array.byte_size(png) > 0
+    // PNG file signature: 89 50 4E 47 0D 0A 1A 0A
+    let assert <<0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, _:bits>> = png
     Nil
   })
 }

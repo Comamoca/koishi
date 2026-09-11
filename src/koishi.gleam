@@ -34,6 +34,20 @@ pub type SatoriError {
   SatoriError(message: String)
 }
 
+/// Error returned when SVG to PNG rendering fails.
+pub type PngError {
+  PngError(message: String)
+}
+
+/// Options for rendering an SVG to PNG with resvg.
+///
+/// Set `width` or `height` to a positive value to scale the output. If both
+/// are zero, the SVG's intrinsic size is used. `background` accepts any CSS
+/// color string; use an empty string to keep the default (transparent).
+pub type PngOptions {
+  PngOptions(width: Int, height: Int, background: String)
+}
+
 /// Render an HTML string to an SVG string.
 ///
 /// Internally: `@comamoca/komeiji`'s `html()` parses the HTML into a
@@ -48,3 +62,17 @@ pub fn to_svg(
   html: String,
   options: Options,
 ) -> Promise(Result(String, SatoriError))
+
+/// Render an SVG string to a PNG image as a `BitArray`.
+///
+/// Uses the npm package `@resvg/resvg-js` (Rust resvg bindings).
+///
+/// ```gleam
+/// koishi.to_png(svg, koishi.PngOptions(width: 1200, height: 0, background: ""))
+/// // -> Promise(Result(BitArray, PngError))
+/// ```
+@external(javascript, "./koishi/ffi.mjs", "svgToPng")
+pub fn to_png(
+  svg: String,
+  options: PngOptions,
+) -> Promise(Result(BitArray, PngError))
