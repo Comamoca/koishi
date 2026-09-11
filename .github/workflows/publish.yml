@@ -17,8 +17,8 @@ jobs:
 
       - uses: erlef/setup-beam@v1
         with:
-          otp-version: "28"
-          gleam-version: "1.14.0"
+          otp-version: latest
+          gleam-version: latest
 
       - name: Download Gleam dependencies
         run: gleam deps download
