@@ -41,7 +41,12 @@ jobs:
       - name: Download Gleam dependencies
         run: gleam deps download
 
-      - name: Publish to Hex
+      - name: Publish package to Hex
         run: gleam publish --yes
         env:
           HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
+
+      - name: Publish docs to HexDocs
+        run: gleam docs publish
+        env:
+          HEXPM_API_KEY: ${{ secrets.HEX_API_KEY }}
