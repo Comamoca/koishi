@@ -17,3 +17,7 @@ gleeunit = ">= 1.0.0 and < 2.0.0"
 
 [javascript]
 runtime = "node"
+
+[javascript.deno]
+allow_env = ["NODE_ENV",  "JEST_WORKER_ID"]
+allow_read = ["./node_modules/harfbuzzjs/hb.wasm", "gleam.toml", "test",  "node_modules/@fontsource/inter/files/inter-latin-400-normal.woff"]
