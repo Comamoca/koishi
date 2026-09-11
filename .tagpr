@@ -1,0 +1,5 @@
+[tagpr]
+	releaseBranch = main
+	versionFile = gleam.toml
+	vPrefix = true
+	release = false
