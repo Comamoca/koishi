@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.3](https://github.com/Comamoca/koishi/compare/v1.0.2...v1.0.3) - 2026-09-11
+
+- chore: add Renovate config based on hinoto by @Comamoca in https://github.com/Comamoca/koishi/pull/10
+
 ## [v1.0.2](https://github.com/Comamoca/koishi/compare/v1.0.1...v1.0.2) - 2026-09-11
 
 - ci: upgrade checkout and setup-node to v5 by @Comamoca in https://github.com/Comamoca/koishi/pull/8
