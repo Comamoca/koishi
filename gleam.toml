@@ -1,5 +1,5 @@
 name = "koishi"
-version = "1.0.3"
+version = "1.0.4"
 target = "javascript"
 
 description = "Generate OG images from Lustre HTML trees, via @comamoca/komeiji and satori"
